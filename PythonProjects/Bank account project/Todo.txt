@@ -1,0 +1,10 @@
+- Login screen 
+	- Takes you to site to see overview of already existing accounts. Taken from a database (excel should be enough)
+Create account
+	- Creates a new account with name and password. Encrypted. Stored in excel file. 
+
+- Home screen
+	- Overview of account
+	- links to deposit, withdraw and overview. 
+
+
