@@ -1,32 +1,34 @@
--- DROP TABLES IF ALREADY EXISTS
-DROP TABLE IF EXISTS Person; 
+-- Drop table if exists
+DROP TABLE IF EXISTS Person;
 
+-- Create table
 CREATE TABLE Person(
     Id INT,
-    FirstName STRING,
-    Surname STRING,
+    FirstName VARCHAR(255),
+    Surname VARCHAR(255),
     Born DATETIME,
     Died DATETIME,
-    BournCountry STRING,
-    BrnCnt STRING,
-    BornCity STRING,
-    DiedCountry STRING,
-    DdCnt STRING,
-    DiedCity String,
-    Gender STRING,
-    Year DATETIME,
-    Category String,
-    Overall_Motivation String,
-    Motivation String,
-    Organization_Name String,
-    Organization_City String,
-    Organization_Country String,
+    BornCountry VARCHAR(255),
+    BrnCnt VARCHAR(255),
+    BornCity VARCHAR(255),
+    DiedCountry VARCHAR(255),
+    DdCnt VARCHAR(255),
+    DiedCity VARCHAR(255),
+    Gender VARCHAR(255),
+    Year INT,
+    Category VARCHAR(255),
+    Overall_Motivation VARCHAR(255),
+    Motivation VARCHAR(255),
+    Organization_Name VARCHAR(255),
+    Organization_City VARCHAR(255),
+    Organization_Country VARCHAR(255),
     PRIMARY KEY (Id)
-)
+);
 
-
-SELECT * INTO Person FROM OPENROWSET(SELECT *
-FROM OPENROWSET(
-    'Microsoft.ACE.OLEDB.12.0',
-    'Excel 8.0;HDR=NO;Database=Nobel Laureates\nobel-prize-laureates.xlsx',
-    'select * from [sheet1$]'))
+-- Load data into the table from CSV
+LOAD DATA INFILE 'Nobel Laureates\nobel-prize-laureates.csv'
+INTO TABLE Person
+FIELDS TERMINATED BY ';'
+ENCLOSED BY '"'
+LINES TERMINATED BY '\n'
+IGNORE 1 ROWS;
