@@ -1,9 +1,9 @@
 -- Drop table if exists
-DROP TABLE IF EXISTS Person;
 
--- Create table
+-- DROP TABLE IF EXISTS Person;
+
 CREATE TABLE Person(
-    Id INT,
+    PersonId INT,
     FirstName VARCHAR(255),
     Surname VARCHAR(255),
     Born DATETIME,
@@ -22,13 +22,14 @@ CREATE TABLE Person(
     Organization_Name VARCHAR(255),
     Organization_City VARCHAR(255),
     Organization_Country VARCHAR(255),
-    PRIMARY KEY (Id)
-);
+    PRIMARY KEY (PersonId)
+)
 
--- Load data into the table from CSV
-LOAD DATA INFILE 'Nobel Laureates\nobel-prize-laureates.csv'
+
+-- Load data from CSV file
+LOAD DATA INFILE 'C:/path/to/your/csvfile.csv'
 INTO TABLE Person
-FIELDS TERMINATED BY ';'
+FIELDS TERMINATED BY ','
 ENCLOSED BY '"'
 LINES TERMINATED BY '\n'
 IGNORE 1 ROWS;
