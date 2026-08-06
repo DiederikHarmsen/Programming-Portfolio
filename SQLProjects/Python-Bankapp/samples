@@ -50,3 +50,15 @@ class BankingService:
         self.session.commit()
 
         return user
+
+    def create_account(self, user, name, balance):
+        account = Account(
+            name=name,
+            balance=balance,
+            user=user
+        )
+
+        self.session.add(account)
+        self.session.commit()
+
+        return account
