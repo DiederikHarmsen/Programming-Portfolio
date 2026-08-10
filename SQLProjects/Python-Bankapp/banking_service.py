@@ -40,6 +40,9 @@ class BankingService:
         return transaction
 
     def withdraw(self, account, amount):
+        if amount <= 0:
+            return False
+
         if account.balance < amount:
             return False
 
@@ -57,6 +60,8 @@ class BankingService:
         return transaction
 
     def transfer(self, from_account, to_account, amount):
+        if amount <= 0:
+            return False
         if from_account.balance < amount:
             return False
 
