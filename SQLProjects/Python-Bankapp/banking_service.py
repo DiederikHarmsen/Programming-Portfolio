@@ -62,26 +62,33 @@ class BankingService:
     def transfer(self, from_account, to_account, amount):
         if amount <= 0:
             return False
+    
         if from_account.balance < amount:
             return False
-
-        from_account.balance -= amount
-        to_account.balance += amount
-
-        transaction_from = Transaction(
-            account=from_account,
-            amount=amount,
-            type="WITHDRAW"
-        )
     
-        transaction_to = Transaction(
-            account=to_account,
-            amount=amount,
-            type="DEPOSIT"
-        )
-
-        self.session.add(transaction_from)
-        self.session.add(transaction_to)
-        self.session.commit()
-
+        try:
+            from_account.balance -= amount
+            to_account.balance += amount
+    
+            transaction_from = Transaction(
+                account=from_account,
+                amount=amount,
+                type="WITHDRAW"
+            )
+    
+            transaction_to = Transaction(
+                account=to_account,
+                amount=amount,
+                type="DEPOSIT"
+            )
+    
+            self.session.add(transaction_from)
+            self.session.add(transaction_to)
+    
+            self.session.commit()
+    
+        except:
+            self.session.rollback()
+            raise
+    
         return True
